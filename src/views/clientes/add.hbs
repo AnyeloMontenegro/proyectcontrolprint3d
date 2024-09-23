@@ -1,0 +1,31 @@
+<div class="container p-4"></div>
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/clientes/add" method="POST">
+                    <div class="form group">
+                        <input type="text" class="form-control" id="rut" name="RUT" placeholder="RUT sin puntos ni guión" autofocus>
+                    </div>
+                    <script> 
+                        const rutInput = document.getElementById('rut');
+                        rutInput.addEventListener('input', function() {const cleanRut = this.value.replace(/\./g, '').replace(/-/g, '');
+                        this.value = cleanRut; });
+                    </script>
+                    <div class="form group">
+                        <input type="text" class="form-control" name="nombre" placeholder="Nombre" autofocus>
+                    </div>
+                    <div class="form group">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success btn-block">
+                            Guardar
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

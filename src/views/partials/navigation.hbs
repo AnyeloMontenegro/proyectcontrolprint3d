@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-body-tertiary">
+  <div class="container">
+    <a class="navbar-brand" href="/">ControlPrint3D</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        {{#if user}}
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">Mi Perfil</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Impresoras
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/impresoras">Todas las impresoras</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/impresoras/add">Agregar impresora</a>
+        </div>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Registros</a>
+        </li>
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Mantenciones
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/mantenciones">Todas las mantenciones</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/mantenciones/add">Agregar Mantención</a>
+        </div>
+      </li>
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Clientes
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/clientes">Todos los clientes</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/clientes/add">Agregar cliente</a>
+        </div>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link">Usuario: {{user.username}}</a>
+        </li>
+         <li class="nav-item">
+          <a href="/logout" class="nav-link">Cerrar sesión</a>
+        </li>
+        {{else}}
+        <li class="nav-item">
+          <a href="/signin" class="nav-link">Ingresar</a>
+        </li>
+        <li class="nav-item">
+          <a href="/signup" class="nav-link">Registrarse</a>
+        </li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</div>
+</nav>

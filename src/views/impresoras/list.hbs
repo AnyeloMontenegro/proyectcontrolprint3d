@@ -1,0 +1,29 @@
+<div class="container p-3"style="max-height: 580px; overflow-y: scroll;">
+    <div class="row">
+        {{#each impresoras}}
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <a href="">
+                        <h3 class="card-username text-uppercase">
+                            {{username}}
+                        </h3>
+                    </a>
+                    <h4 class="m-2">Ubicación: {{ubicacion}}</h4>
+                    <h5 class="m-2">Material en gramos: {{material}}</h5>
+                    <h5 class="m-2">Tiempo en minutos: {{tiempo}}</h5>
+                    <a href="/impresoras/delete/{{id}}" class="btn btn-danger">Eliminar Impresora</a>
+                    <a href="/impresoras/edit/{{id}}" class="btn btn-secondary">Editar</a>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="col-md-4 mx-auto">
+            <div class="card card-body text-center">
+                <p>No hay impresoras registradas.</p>
+                <a href="/impresoras/add">Ingresar Impresora</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

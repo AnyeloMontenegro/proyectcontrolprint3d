@@ -1,0 +1,30 @@
+<div class="container p-3" style="max-height: 580px; overflow-y: scroll;">
+    <form method="GET" action="/impresoras" class="form-inline mb-3">
+            <input type="text" name="filtro" class="form-control mr-2" placeholder="Buscar impresoras..." value="{{filtro}}">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+        <!-- Tabla de impresoras -->
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Impresora</th>
+                    <th>Descripción</th>
+                    <th>Creado Hace</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each mantenciones}}
+                <tr>
+                    <td>{{nombre_impresora}}</td>
+                    <td>{{description}}</td>
+                    <td><time class="timeago" datetime="{{created_at}}">{{timeago created_at}}</time></td>
+                    <td>
+                    <a href="/mantenciones/delete/{{id}}" class="btn btn-danger">Eliminar</a>
+                    <a href="/mantenciones/edit/{{id}}" class="btn btn-secondary">Editar</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>

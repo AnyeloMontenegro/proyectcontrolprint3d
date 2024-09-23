@@ -1,0 +1,29 @@
+<div class="container p-4"></div>
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/impresoras/edit/{{impresora.id}}" method="POST">
+                    <div class="form group">
+                        <input type="text" value="{{impresora.username}}"  class="form-control" name="username" placeholder="Nombre" autofocus>
+                    </div>
+                    <div class="form group">
+                        <input type="text" value="{{impresora.ubicacion}}" name="ubicacion" class="form-control" placeholder="Ubicación">
+                    </div>
+                    <div class="form group">
+                        <input type="text" value="{{impresora.material}}" name="material" class="form-control" placeholder="Material">
+                    </div>
+                    <div class="form group">
+                        <input type="text" value="{{impresora.tiempo}}" name="tiempo" class="form-control" placeholder="Tiempo">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success btn-block">
+                            Guardar
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
