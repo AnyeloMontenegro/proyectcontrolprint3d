@@ -1,9 +1,9 @@
 module.exports = {
 
     database: {
-        host: 'localhost',
+        host: 'mysql.railway.internal',
         user: 'root',
-        password: 'anyelo2023',
-        database: 'proyecto_titulo'
+        password: 'hGFhyTJOtaeCRgkmggpfhPFsMArEpngl',
+        database: 'railway'
     }
 };
