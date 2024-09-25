@@ -1,0 +1,52 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/registros/add" method="POST" onsubmit="return convertToMinutes()">
+                        <div class="form-group">
+                            <label for="impresora_id">Ingresar Registro:</label>
+                            <select name="impresora_id" class="form-control" required>
+                                <option value="">Selecciona una impresora</option>
+                                {{#each impresoras}}
+                                    <option value="{{id}}">{{username}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="material">Material (en gramos):</label>
+                            <input type="number" class="form-control" name="material" placeholder="Cantidad de material" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="horas">Horas:</label>
+                            <input type="number" id="horas" class="form-control" name="horas" placeholder="Horas" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="minutos">Minutos:</label>
+                            <input type="number" id="minutos" class="form-control" name="minutos" placeholder="Minutos" min="0" max="59" value="0">
+                        </div>
+                        <input type="hidden" id="totalMinutos" name="tiempo" value="0"> <!-- Campo oculto para almacenar el tiempo total -->
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block">Guardar Registro</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function convertToMinutes() {
+    const horas = parseInt(document.getElementById('horas').value) || 0;
+    const minutos = parseInt(document.getElementById('minutos').value) || 0;
+    
+    // Convertir horas a minutos y sumar los minutos
+    const totalMinutos = (horas * 60) + minutos;
+
+    // Asignar el total de minutos al campo oculto
+    document.getElementById('totalMinutos').value = totalMinutos;
+
+    return true; // Permitir el envío del formulario
+}
+</script>

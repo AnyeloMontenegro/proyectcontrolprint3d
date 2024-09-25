@@ -4,52 +4,57 @@ const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 
-router.get('/add', isLoggedIn, (req, res) => {
-    res.render('mantenciones/add');
+router.get('/add', isLoggedIn, async (req, res) => {
+    try {
+        const impresoras = await pool.query('SELECT id, username FROM impresoras');
+        res.render('mantenciones/add', { impresoras });
+    } catch (error) {
+        req.flash('error', 'Error al obtener las impresoras');
+        console.error(error);
+        res.redirect('/mantenciones');
+    }
 });
 
-//PRUEBA DE FILTRO
+router.post('/add', isLoggedIn, async (req, res) => {
+    const { impresora_id, description } = req.body;  // Solo recogemos impresora_id y description
+    const newMantencion = {
+        impresora_id,   // ID de la impresora seleccionada
+        description     // Descripción de la mantención ingresada por el usuario
+    };
+    
+    try {
+        await pool.query('INSERT INTO mantenciones SET ?', [newMantencion]);
+        req.flash('success', 'Mantención ingresada correctamente');
+        res.redirect('/mantenciones');
+    } catch (error) {
+        req.flash('error', 'Error al ingresar la mantención');
+        console.error(error);
+        res.redirect('/mantenciones');
+    }
+});
 
-router.get('/mantenciones', async (req, res) => {
-    const { filtro } = req.query;  // Obtener el valor del filtro de la query string
-    let query = {};
+router.get('/', isLoggedIn, async (req, res) => {
+    const { filtro } = req.query; // Obtener el valor del filtro de la query
 
-    // Si hay un filtro, buscar en el nombre o la descripción de la impresora
+    let query = `
+        SELECT m.*, i.username 
+        FROM mantenciones m
+        JOIN impresoras i ON m.impresora_id = i.id
+    `;
+
+    // Si hay un filtro, agregar la cláusula WHERE
     if (filtro) {
-        query = {
-            $or: [
-                { nombre_impresora: { $regex: filtro, $options: 'i' } },  // 'i' es para case-insensitive
-            ]
-        };
+        query += ` WHERE i.username LIKE ?`;
     }
 
     try {
-        // Buscar impresoras en la base de datos
-        const mantenciones = await Mantencion.find(query).lean();
-
-        // Renderizar la vista con las impresoras y el filtro
+        const mantenciones = await pool.query(query, [`%${filtro}%`]); // Usar un wildcard para buscar por coincidencias
         res.render('mantenciones/list', { mantenciones, filtro });
     } catch (error) {
-        res.status(500).send('Error al obtener impresoras');
+        req.flash('error', 'Error al obtener las mantenciones');
+        console.error(error);
+        res.redirect('/mantenciones');
     }
-});
-
-//FIN DE PRUEBA FILTRO
-
-router.post('/add', isLoggedIn, async (req, res) => {
-    const {nombre_impresora, description} = req.body;
-    const newMantencion = {
-        nombre_impresora,
-        description
-    };
-    await pool.query('INSERT INTO mantenciones set ?', [newMantencion]);
-    req.flash('success', 'Mantención ingresada correctamente')
-    res.redirect('/mantenciones');
-});
-
-router.get('/', isLoggedIn, async (req, res) =>{
-    const mantenciones = await pool.query('SELECT * FROM mantenciones');
-    res.render('mantenciones/list', { mantenciones });
 });
 
 router.get('/delete/:id', isLoggedIn, async (req, res) =>{
@@ -67,9 +72,8 @@ router.get('/edit/:id', isLoggedIn, async (req, res) => {
 
 router.post('/edit/:id', isLoggedIn, async (req, res) => {
     const {id} = req.params;
-    const {nombre_impresora, description} = req.body;
+    const {description} = req.body;
     const newMantencion = {
-    nombre_impresora,
     description
     };
     await pool.query('UPDATE mantenciones set ? WHERE id = ?', [newMantencion, id]);

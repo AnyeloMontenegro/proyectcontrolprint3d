@@ -1,20 +1,33 @@
-<div class="container p-4"></div>
+<div class="container p-4">
     <div class="row">
         <div class="col-md-4 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <form action="/mantenciones/add" method="POST">
-                    <div class="form group">
-                        <input type="text" class="form-control" name="nombre_impresora" placeholder="Nombre impresora" autofocus>
-                    </div>
-                    <div class="form group">
-                        <textarea name="description" rows="2" class="form-control" placeholder="Ingrese mantenimiento"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success btn-block">
-                            Guardar
-                        </button>
-                    </div>
+
+                        <!-- Campo Select para seleccionar la impresora -->
+                        <div class="form-group">
+                            <label for="impresora_id">Ingresar Mantención</label>
+                            <select name="impresora_id" class="form-control" required>
+                                <option value="">Selecciona una impresora</option>
+                                {{#each impresoras}}
+                                    <option value="{{id}}">{{username}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <!-- Campo para la descripción de la mantención -->
+                        <div class="form-group">
+                            <textarea name="description" rows="2" class="form-control" placeholder="Ingrese mantenimiento" required></textarea>
+                        </div>
+
+                        <!-- Botón de guardar -->
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block">
+                                Guardar
+                            </button>
+                        </div>
+
                     </form>
                 </div>
             </div>

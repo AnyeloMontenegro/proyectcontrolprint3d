@@ -12,7 +12,7 @@
                     <h4 class="m-2">Ubicación: {{ubicacion}}</h4>
                     <h5 class="m-2">Material en gramos: {{material}}</h5>
                     <h5 class="m-2">Tiempo en minutos: {{tiempo}}</h5>
-                    <a href="/impresoras/delete/{{id}}" class="btn btn-danger">Eliminar Impresora</a>
+                    <a href="/impresoras/delete/{{id}}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta impresora?');">Eliminar Impresora</a>
                     <a href="/impresoras/edit/{{id}}" class="btn btn-secondary">Editar</a>
                 </div>
             </div>

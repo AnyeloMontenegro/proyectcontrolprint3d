@@ -58,10 +58,29 @@ CREATE TABLE clientes(
     email VARCHAR(60) NOT NULL UNIQUE
 );
 
-ALTER TABLE clientes MODIFY nombre VARCHAR(25) NOT NULL;
-
-ALTER TABLE clientes MODIFY nombre VARCHAR(30) NOT NULL;
-
 ALTER TABLE clientes MODIFY nombre VARCHAR(35) NOT NULL;
 
 ALTER TABLE clientes MODIFY COLUMN RUT VARCHAR(12);
+
+ALTER TABLE mantenciones DROP COLUMN nombre_impresora;
+
+--TABLA DE REGISTROS
+CREATE TABLE registros (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    impresora_id INT(11),
+    material INT(11) NOT NULL,
+    tiempo INT(11) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_impresora FOREIGN KEY (impresora_id) REFERENCES impresoras(id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE registros (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    impresora_id INT(11),
+    material INT(11) NOT NULL,
+    tiempo INT(11) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_registro_impresora FOREIGN KEY (impresora_id) REFERENCES impresoras(id),
+    PRIMARY KEY (id)
+);

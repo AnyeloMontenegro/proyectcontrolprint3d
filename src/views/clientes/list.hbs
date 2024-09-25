@@ -20,7 +20,7 @@
                     <td>{{nombre}}</td>
                     <td>{{email}}</td>
                     <td>
-                    <a href="/clientes/delete/{{RUT}}" class="btn btn-danger">Eliminar</a>
+                    <a href="/clientes/delete/{{RUT}}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">Eliminar</a>
                     <a href="/clientes/edit/{{RUT}}" class="btn btn-secondary">Editar</a>
                     </td>
                 </tr>

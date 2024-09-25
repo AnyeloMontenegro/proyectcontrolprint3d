@@ -21,15 +21,30 @@ router.post('/add', isLoggedIn, async (req, res) => {
     res.redirect('/impresoras');
 });
 
-router.get('/', isLoggedIn, async (req, res) =>{
-    const impresoras = await pool.query('SELECT * FROM impresoras');
-    res.render('impresoras/list', { impresoras });
+router.get('/', isLoggedIn, async (req, res) => {
+    try {
+        const impresoras = await pool.query('SELECT * FROM impresoras');
+        res.render('impresoras/list', { impresoras });
+    } catch (error) {
+        req.flash('error', 'Error al obtener las impresoras');
+        console.error(error);
+        res.redirect('/impresoras');
+    }
 });
 
-router.get('/delete/:id', isLoggedIn, async (req, res) =>{
+router.get('/delete/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
-    await pool.query('DELETE FROM impresoras WHERE ID = ?', [id]);
-    req.flash('success', 'Impresora eliminada satisfactoriamente');
+    try {
+        // Eliminar registros relacionados
+        await pool.query('DELETE FROM registros WHERE impresora_id = ?', [id]);
+        
+        // Ahora elimina la impresora
+        await pool.query('DELETE FROM impresoras WHERE ID = ?', [id]);
+        req.flash('success', 'Impresora eliminada satisfactoriamente');
+    } catch (error) {
+        req.flash('error', 'Error al eliminar la impresora');
+        console.error(error);
+    }
     res.redirect('/impresoras');   
 });
 

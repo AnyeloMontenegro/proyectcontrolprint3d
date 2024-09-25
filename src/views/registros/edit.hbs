@@ -1,0 +1,25 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/registros/edit/{{registro.id}}" method="POST">
+                    <div class="form group">
+                        <label for="material">Material en gramos:</label>
+                            <input type="number" value="{{registro.material}}" class="form-control" name="material" placeholder="Cantidad de material" required>
+                    </div>
+                     <div class="form-group">
+                            <label for="tiempo">Tiempo en minutos:</label>
+                            <input type="number" value="{{registro.tiempo}}" class="form-control" name="tiempo" placeholder="Tiempo en minutos" required>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success btn-block">
+                            Guardar
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

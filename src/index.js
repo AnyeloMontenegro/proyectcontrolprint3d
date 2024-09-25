@@ -58,6 +58,7 @@ app.use(require('./routes/authentication'));
 app.use('/impresoras', require('./routes/impresoras'));
 app.use('/mantenciones', require('./routes/mantenciones'));
 app.use('/clientes', require('./routes/clientes'));
+app.use('/registros', require('./routes/registros'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
