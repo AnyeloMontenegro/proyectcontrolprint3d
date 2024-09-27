@@ -43,7 +43,7 @@ router.post('/add', isLoggedIn, async (req, res) => {
     }
 });
 
-//FILTRO FILTRO FILTRO
+//FILTRO
 router.get('/', isLoggedIn, async (req, res) => {
     const { filtro } = req.query; // Obtener el valor del filtro de la query
 
@@ -67,8 +67,6 @@ router.get('/', isLoggedIn, async (req, res) => {
         res.redirect('/registros');
     }
 });
-
-// FIN FILTRO FIN FILTRO
 
 router.get('/delete/:id', isLoggedIn, async (req, res) =>{
     const { id } = req.params;

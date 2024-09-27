@@ -75,12 +75,12 @@ CREATE TABLE registros (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE registros (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    impresora_id INT(11),
-    material INT(11) NOT NULL,
-    tiempo INT(11) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_registro_impresora FOREIGN KEY (impresora_id) REFERENCES impresoras(id),
-    PRIMARY KEY (id)
-);
+
+ALTER TABLE users ADD COLUMN role ENUM('user', 'admin') DEFAULT 'user';
+
+UPDATE users SET role = 'admin' WHERE username = 'anyelo';
+
+ALTER TABLE users MODIFY COLUMN email VARCHAR(60) NOT NULL UNIQUE;
+
+ALTER TABLE impresoras MODIFY COLUMN ubicacion INT(11) UNIQUE;
+

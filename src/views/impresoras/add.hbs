@@ -5,17 +5,19 @@
                 <div class="card-body">
                     <form action="/impresoras/add" method="POST">
                     <div class="form group">
+                        <label>Ingresar Impresora</label>
                         <input type="text" class="form-control" name="username" placeholder="Nombre" autofocus>
                     </div>
                     <div class="form group">
                         <input type="text" name="ubicacion" class="form-control" placeholder="Ubicación" autofocus>
                     </div>
                      <div class="form group">
-                        <input type="text" class="form-control" name="material" placeholder="Material" autofocus>
+                        <input type="text" class="form-control" name="material" placeholder="Material" min="0" autofocus>
                     </div>
                     <div class="form group">
-                        <input type="text" name="tiempo" class="form-control" placeholder="Tiempo" autofocus>
+                        <input type="text" name="tiempo" class="form-control" placeholder="Tiempo" min="0" autofocus>
                     </div>
+                    <label class="font-italic">*Valores de Tiempo y Material registrar en cero(0).</label>
                     <div class="form-group">
                         <button class="btn btn-success btn-block">
                             Guardar

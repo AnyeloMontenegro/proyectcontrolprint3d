@@ -9,16 +9,23 @@ router.get('/add', isLoggedIn, (req, res) => {
 });
 
 router.post('/add', isLoggedIn, async (req, res) => {
-    const {username, ubicacion, material, tiempo} = req.body;
+    const { username, ubicacion, material, tiempo } = req.body;
     const newImpresora = {
         username,
         ubicacion,
         material,
         tiempo
     };
-    await pool.query('INSERT INTO impresoras set ?', [newImpresora]);
-    req.flash('success', 'Impresora ingresada correctamente.');
-    res.redirect('/impresoras');
+
+    try {
+        await pool.query('INSERT INTO impresoras SET ?', [newImpresora]);
+        req.flash('success', 'Impresora ingresada correctamente.');
+        res.redirect('/impresoras');
+    } catch (error) {
+        console.error(error);
+        req.flash('message', 'Error al ingresar la impresora. Intenta de nuevo.');
+        res.redirect('/impresoras/add'); 
+    }
 });
 
 router.get('/', isLoggedIn, async (req, res) => {

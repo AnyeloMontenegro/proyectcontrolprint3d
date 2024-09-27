@@ -51,6 +51,16 @@
           <a class="dropdown-item" href="/clientes/add">Agregar cliente</a>
         </div>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Gestión Usuarios
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/auth">Todos los usuarios</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/auth/signup">Agregar Usuario</a>
+        </div>
+      </li>
         <li class="nav-item">
           <a class="nav-link">Usuario: {{user.username}}</a>
         </li>
@@ -60,9 +70,6 @@
         {{else}}
         <li class="nav-item">
           <a href="/signin" class="nav-link">Ingresar</a>
-        </li>
-        <li class="nav-item">
-          <a href="/signup" class="nav-link">Registrarse</a>
         </li>
         {{/if}}
       </ul>
